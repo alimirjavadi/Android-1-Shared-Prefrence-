@@ -1,45 +1,47 @@
-package com.example.SharedPrefrence;
+package com.example.sharedprefrences;
 
-import android.content.Intent;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText editUsername, editPassword;
-    Button btnSubmit;
+    EditText editTextNumber1, editTextNumber2, editTextResult;
+    Button buttonAdd, buttonSubtract, buttonMultiply, buttonDivide;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        editUsername = findViewById(R.id.editUsername);
-        editPassword = findViewById(R.id.editPassword);
-        btnSubmit = findViewById(R.id.btnSubmit);
+        EditText edtname = findViewById(R.id.name);
+        EditText edtfamily = findViewById(R.id.family);
+        Button btn = findViewById(R.id.btn);
 
-        btnSubmit.setOnClickListener(v -> {
-            String username = editUsername.getText().toString();
-            String password = editPassword.getText().toString();
+        SharedPreferences dpuser = getSharedPreferences("mydb" , Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = dpuser.edit();
 
-            if (username.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "لطفاً تمام فیلدها را پر کنید", Toast.LENGTH_SHORT).show();
-                return;
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    String sname = edtname.getText().toString().trim();
+                    String sfamily = edtfamily.getText().toString().trim();
+                    editor.putString("name" , sname);
+                    editor.putString("family" , sfamily);
+                    editor.apply();
+                    Toast.makeText(MainActivity.this, "اطلاعات با موفقیت انجام شد", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+
             }
-
-            SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("username", username);
-            editor.putString("password", password);
-            editor.apply();
-
-            Toast.makeText(this, "اطلاعات با موفقیت ذخیره شد", Toast.LENGTH_SHORT).show();
-
-            startActivity(new Intent(MainActivity.this, SecondActivity.class));
         });
     }
 }
