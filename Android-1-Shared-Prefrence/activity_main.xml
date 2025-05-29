@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:background="#34BB81"
+    >
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:hint="نام"
+            android:textColor="#fff"
+            android:textColorHint="@color/white"
+            android:layout_gravity="center"
+            android:layout_marginTop="150dp"
+            />
+        <EditText
+            android:id="@+id/family"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:hint="نام خانوادگی"
+            android:textColor="#fff"
+            android:textColorHint="@color/white"
+            android:layout_gravity="center"
+            />
+
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ثبت نام"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            />
+    </LinearLayout>
+
+</LinearLayout>
